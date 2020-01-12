@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="loading-indicator" *ngIf="isLoader">
+      <mat-progress-spinner [diameter]="50" mode="indeterminate"></mat-progress-spinner>
+    </div>
+    <!-- Toolbar -->
+    <div class="toolbar" role="banner">
+      <img
+        width="40"
+        alt="Angular Logo"
+        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+      />
+      <span>Starkflow Assignment</span>
+    </div>
+    <div class="spacer">
+          <mat-form-field>
+            <i matPrefix class="material-icons" style="font-size: small; margin-right: 2px;">
+              search
+              </i>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search pokemon">
+          </mat-form-field>
+          
+          <mat-card class="mat-elevation-z8">
+            <!-- <mat-card-content > -->
+              <table mat-table [dataSource]="dataSource" matSort>
+            
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Pokemon Name </th>
+                  <td mat-cell *matCellDef="let row"> {{row['name'] | titlecase}} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="image">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Pokemon Image </th>
+                  <td mat-cell *matCellDef="let row"> <img [src]="row.image"></td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="view_data(row)">
+                </tr>
+              </table>
+            
+              <!-- <mat-paginator [pageSizeOptions]="[20]"></mat-paginator> -->
+              <div class="paginator"> 
+                <i (click)="onPaginateChange('prev')" matTooltip="Previous" class="material-icons">
+                  skip_previous
+                  </i>
+                <i (click)="onPaginateChange('next')" matTooltip="Next" class="material-icons">
+                  skip_next
+                  </i>
+              </div>
+              
+            <!-- </mat-card-content> -->
+          </mat-card>
+          
+    </div>
+  </div>
